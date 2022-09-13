@@ -109,6 +109,7 @@ h1 {
 
 .complete {
   color: var(--light-blue);
+  font-size: 12px;
 }
 
 .edit {

@@ -33,6 +33,7 @@ const prepareDOMElements = () => {
 const prepareDOMEvents = () => {
   $addBtn.addEventListener('click', addNewTask);
   $todoInput.addEventListener('keyup', enterCheck);
+  $ulList.addEventListener('click', checkClick);
 };
 
 const addNewTask = () => {
@@ -45,6 +46,7 @@ const addNewTask = () => {
 
     $todoInput.value = '';
     $alertInfo.innerText = '';
+    createToolsArea();
   } else {
     $alertInfo.innerText = 'Wpisz treść zadania';
   }
@@ -53,6 +55,54 @@ const addNewTask = () => {
 const enterCheck = (event) => {
   if (event.key === 'Enter') {
     addNewTask();
+  }
+};
+
+const createToolsArea = () => {
+  const toolsPanel = document.createElement('div');
+  toolsPanel.classList.add('tools');
+  $newTask.appendChild(toolsPanel);
+
+  const completeBtn = document.createElement('button');
+  completeBtn.classList.add('complete');
+  completeBtn.innerHTML = '<i class="fas fa-check"></i>';
+
+  const editBtn = document.createElement('button');
+  editBtn.classList.add('edit');
+  editBtn.innerHTML = 'EDIT';
+
+  const deleteBtn = document.createElement('button');
+  deleteBtn.classList.add('delete');
+  deleteBtn.innerHTML = '<i class="fas fa-times"></i>';
+
+  toolsPanel.appendChild(completeBtn);
+  toolsPanel.appendChild(editBtn);
+  toolsPanel.appendChild(deleteBtn);
+  // <div class="tools">
+  //   <button class="complete"><i class="fas fa-check"></i></button
+  //   ><button class="edit">EDIT</button
+  //   ><button class="delete"><i class="fas fa-times"></i></button>
+  // </div>
+};
+
+const checkClick = (e) => {
+  if (e.target.classList.value !== '') {
+    if (e.target.closest('button').classList.contains('complete')) {
+      e.target.closest('li').classList.toggle('completed');
+      e.target.closest('button').classList.toggle('completed');
+    } else if (e.target.closest('button').classList.contains('edit')) {
+    } else if (e.target.closest('button').classList.contains('delete')) {
+      deleteTask(e);
+    }
+  }
+};
+
+const deleteTask = (e) => {
+  const deleteTodo = e.target.closest('li');
+  deleteTodo.remove();
+
+  if ($ulList.innerText == '') {
+    $alertInfo.innerText = 'Brak zadań na liście.';
   }
 };
 
