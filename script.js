@@ -78,11 +78,6 @@ const createToolsArea = () => {
   toolsPanel.appendChild(completeBtn);
   toolsPanel.appendChild(editBtn);
   toolsPanel.appendChild(deleteBtn);
-  // <div class="tools">
-  //   <button class="complete"><i class="fas fa-check"></i></button
-  //   ><button class="edit">EDIT</button
-  //   ><button class="delete"><i class="fas fa-times"></i></button>
-  // </div>
 };
 
 const checkClick = (e) => {
